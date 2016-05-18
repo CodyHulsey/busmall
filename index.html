@@ -3,19 +3,27 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
     <title>BUSMALL</title>
-    </head>
+  </head>
   <body>
     <header>
+      <p>Click your favorite image!</p>
     </header>
-    <section id="threeImages">
-    <img src id='img1' class='four columns'>
-    <img src id='img2' class='four columns'>
-    <img src id='img3' class='four columns'>
+    <section id="images">
+      <img src='' alt='' id='img1' class='four columns'>
+      <img src='' alt='' id='img2' class='four columns'>
+      <img src='' alt='' id='img3' class='four columns'>
     </section>
+    <section id="results">
+      <button type="button" id='resultsButton' name="resultsButton" hidden="results"></button>
+      <button type="button" id='resetButton' name="resetButton" hidden="reset"></button>
+      <button type="button" id='viewResultsButton' name='viewResults' hidden="viewResults"></button>
+    </section>
+  </section>
+
     <footer>
     </footer>
-    <script type="text/javascript" src="app.js">
-    </script>
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
