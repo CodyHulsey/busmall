@@ -2,7 +2,7 @@ var allImages = [];
 var imageNames = ['bag', 'banana', 'boost', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'water_can', 'wine_glass'];
 
 function Product(name, path) {
-  totalClicks = 0;
+  this.totalClicks = 0;
   this.name = name;
   this.path = path;
   this.tally = 0;
@@ -21,13 +21,15 @@ var imageRank = {
   leftObj: null,
   midObj: null,
   rightObj: null,
-  imageEls: document.getElementById('images'),
+
   leftEl: document.getElementById('img1'),
   midEl: document.getElementById('img2'),
   rightEl: document.getElementById('img3'),
-  resultsEl: document.getElementById('resultsButton'),
-  resetEl: document.getElementById('resetButton'),
-  viewResultsEl: document.getElementById('viewResultsButton'),
+  imageEls: document.getElementById('images'),
+  resultsEl: document.getElementById('results'),
+  resultsButton: document.getElementById('resultsButton'),
+  resetButton: document.getElementById('resetButton'),
+  viewResultsButton: document.getElementById('viewResultsButton'),
 
   getRandomIndex: function() {
     return Math.floor(Math.random() * imageNames.length);
@@ -37,9 +39,9 @@ var imageRank = {
     imageRank.leftObj = allImages[imageRank.getRandomIndex()];
     imageRank.midObj = allImages[imageRank.getRandomIndex()];
     imageRank.rightObj = allImages[imageRank.getRandomIndex()];
-    if (imageRank.leftObj === imageRank.midObj || imageRank.leftObj === imageRank.rightObj || imageRank.rightObj === imageRank.midObj);
-    // displayImages();
-
+    if (imageRank.leftObj === imageRank.midObj || imageRank.leftObj === imageRank.rightObj || imageRank.rightObj === imageRank.midObj) {
+      imageRank.displayImages();
+    }
     imageRank.leftObj.views += 1;
     imageRank.midObj.views += 1;
     imageRank.rightObj.views += 1;
@@ -56,10 +58,11 @@ var imageRank = {
 
   tallyClicks: function(elementId) {
     for(var i in allImages) {
-      if (allImages[i].name === elementId[i])
-        allImages[i].tally += 1;
-      this.totalClicks += 1;
-      console.log(allImages[i].name + ' has' + allImages[i] + ' votes');
+      if (elementId[i] === allImages[i].name) {
+        allImages[i].tally ++;
+        this.totalClicks ++;
+        console.log(allImages[i].name + ' has ' + allImages[i].tally + ' votes');
+      }
     }
   },
   displayResults: function() {
@@ -92,13 +95,15 @@ var imageRank = {
   },
 //
   onClick: function() {
-    if (event.target.id === imageRank.leftObj.name || event.target.id === imageRank.rightObj.name || event.target.id === imageRank.midObj.name);
-    imageRank.tallyClicks(event.target.id);
-    imageRank.totalClicks += 1;
+    if (event.target.id === imageRank.leftObj.name || event.target.id === imageRank.midObj.name || event.target.id === imageRank.rightObj.name) {
+      imageRank.tallyClicks(event.target.id);
+      // imageRank.totalClicks += 1;
 
-    if (imageRank.totalClicks % 15 === 0) {
-      imageRank.imageEls.removeEventListener('Click', imageRank.onClick);
-      imageRank.showButton();
+      if (imageRank.totalClicks % 15 === 0) {
+        imageRank.imageEls.removeEventListener('Click', imageRank.onClick);
+        imageRank.showButton();
+      }
+      imageRank.displayImages();
     } else {
       alert('Click on the image!!!');
     }
