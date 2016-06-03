@@ -73,6 +73,15 @@ var imageRank = {
         data.datasets[0].data[i] = allImages[i].tally;
         this.totalClicks += 1;
         console.log(allImages[i].name + ' has ' + allImages[i].tally + ' votes');
+
+        var perStorage = JSON.stringify(allImages);
+        console.log(typeof(perStorage));
+
+        localStorage.setItem('votes', perStorage);
+
+        var storageVotes = localStorage.getItem('votes');
+        storageVotes = JSON.parse(storageVotes);
+        console.log(typeof(storageVotes));
       }
     }
   },
