@@ -1,20 +1,31 @@
 var allImages = [];
 var imageNames = ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'water_can', 'wine_glass'];
 
+var data = {
+  labels: imageNames,
+  datasets: [
+    {
+      label: 'Number of Image Clicks',
+      backgroundColor: 'rgba(0, 0, 255, 0.3)',
+      data: []
+    }
+  ]
+};
+
 function Product(name, path) {
   this.name = name;
   this.path = path;
   this.tally = 0;
   allImages.push(this);
-  // this.totalClicks = 0;
-
-}
+  data.datasets[0].data.push(this.tally);
+};
 
 (function createSlider() {
   for(var i = 0; i < imageNames.length; i++) {
     new Product(imageNames[i], 'images/' + imageNames[i] + '.jpg');
   }
 })();
+
 
 var imageRank = {
   totalClicks: 0,
@@ -59,12 +70,53 @@ var imageRank = {
     for(var i in allImages) {
       if (elementId === allImages[i].name) {
         allImages[i].tally += 1;
+        data.datasets[0].data[i] = allImages[i].tally;
         this.totalClicks += 1;
         console.log(allImages[i].name + ' has ' + allImages[i].tally + ' votes');
       }
     }
   },
   displayResults: function() {
+
+    var ctx = document.getElementById("myChart").getContext("2d");;
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      //   // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      //   datasets: [{
+      //     label: '# of Votes',
+      //     data: [12, 19, 3, 5, 2, 3],
+      //     backgroundColor: [
+      //       'rgba(255, 99, 132, 0.2)',
+      //       'rgba(54, 162, 235, 0.2)',
+      //       'rgba(255, 206, 86, 0.2)',
+      //       'rgba(75, 192, 192, 0.2)',
+      //       'rgba(153, 102, 255, 0.2)',
+      //       'rgba(255, 159, 64, 0.2)'
+      //     ],
+      //     borderColor: [
+      //       'rgba(255,99,132,1)',
+      //       'rgba(54, 162, 235, 1)',
+      //       'rgba(255, 206, 86, 1)',
+      //       'rgba(75, 192, 192, 1)',
+      //       'rgba(153, 102, 255, 1)',
+      //       'rgba(255, 159, 64, 1)'
+      //     ],
+      //     borderWidth: 1
+      //   }]
+      // },
+      // options: {
+      //   scales: {
+      //     yAxes: [{
+      //       ticks: {
+      //         beginAtZero:true
+      //       }
+      //     }]
+      //   }
+      // }
+    });
+
     var ulEl = document.createElement('ul');
     for(var i in allImages) {
       var liElOne = document.createElement('li');
