@@ -10,3 +10,4 @@ Work done during this project:
 - After 15 clicks, a button will show up in the bottom lefthand corner and when that button is clicked, they can see their results
 - Added a css animation so that when the user hovers over the image, it shakes
 - Styled the page like a true amature software engineer
+- Added Chart.js so that the user can visually see their results
