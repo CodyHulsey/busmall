@@ -1,6 +1,7 @@
 p {
   color: white;
   text-align: center;
+  font-style: times;
 }
 
 .container {
@@ -24,6 +25,7 @@ display: inline-block;
   height: 500px;
   width: 400px;
   display: center;
+  box-shadow: 10px 10px 5px #D3D3D3;
 }
 
 body {
